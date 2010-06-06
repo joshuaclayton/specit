@@ -74,4 +74,32 @@ describe("SpecIt", function() {
     "202-555-1212".should(match, /\d{3}.\d{3}.\d{4}/);
     "string".shouldNot(match, /\w{10}/);
   });
+
+  it("should match on method presence", function() {
+    var myObject = {
+      attribute1: 1,
+      booleanAttr: true,
+      methodAttr: function() {}
+    };
+
+    myObject.should(respondTo, "methodAttr");
+    myObject.shouldNot(respondTo, "attribute1");
+    myObject.shouldNot(respondTo, "booleanAttr");
+    myObject.shouldNot(respondTo, "junkMethod");
+
+    var Person = function(options) {
+      this.name = options.name || "";
+      this.age = options.age || 13;
+      this.sayHi = function() {
+        return "Hello; my name is " + this.name;
+      };
+      return this;
+    };
+
+    var john = new Person({name: "John Doe", age: 35});
+    john.should(respondTo, "sayHi");
+    john.shouldNot(respondTo, "name");
+    john.shouldNot(respondTo, "age");
+    john.shouldNot(respondTo, "sayGoodbye");
+  });
 });
