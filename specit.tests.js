@@ -158,3 +158,55 @@ describe("SpecIt", function() {
    $(".workspace").empty();
   });
 });
+
+var john, beforeCallbackTest, afterCallbackTest;
+
+describe("SpecIt with a before callback", function() {
+  var jane = {name: "Jane"};
+
+  before(function() {
+    beforeCallbackTest = true;
+    john = {name: "John Doe"};
+  });
+
+  it("should support before", function() {
+    ok(beforeCallbackTest);
+    equal(afterCallbackTest, undefined);
+  });
+
+  it("should run before every test", function() {
+    john.name = "Wrong name";
+    jane.age = 26;
+  });
+
+  it("should run before every test", function() {
+    equals(john.name, "John Doe");
+  });
+
+  it("should not know attributes from another before callback", function() {
+    equals(john.age, undefined);
+  });
+
+  it("should not modify attributes on a local object if untouched in before", function() {
+    equals(jane.age, 26);
+  });
+});
+
+// the john object will carry over, but the jane object will not
+describe("SpecIt with a different before callback", function() {
+  before(function() { john.age = 35; });
+
+  it("should not run other describes' before callbacks", function() {
+    john.name = "whatever";
+    equals(john.age, 35);
+  });
+
+  it("should not run other describes' before callbacks", function() {
+    equals(john.name, "whatever");
+    equals(john.age, 35);
+  });
+
+  it("should not know of other objects in a different describe", function() {
+    equals(typeof jane, "undefined");
+  });
+});

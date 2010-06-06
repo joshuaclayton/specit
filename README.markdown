@@ -9,6 +9,12 @@ I don't have the patience to write my own JS testing framework so I figured I'd 
 ## Example
 
     describe("SpecIt", function() {
+      var john;
+
+      before(function() {
+        john = {name: "John Doe", age: 26};
+      });
+
       it("should match on inclusion", function() {
         [1, 2].should(include, 1, 2);
         ({one: 1, two: 2}).should(include, "one");
@@ -20,6 +26,16 @@ I don't have the patience to write my own JS testing framework so I figured I'd 
         (function() {}).should(beA, Function);
         true.should(beA, Boolean);
         ({}).should(beAn, Object);
+      });
+
+      it("allows overriding variables", function() {
+        john = {};
+        john.shouldNot(include, "name");
+      });
+
+      it("should use before blocks", function() {
+        john.name.should(eql, "John Doe");
+        john.age.should(beLessThan, 30);
       });
     });
 
@@ -37,6 +53,10 @@ I don't have the patience to write my own JS testing framework so I figured I'd 
 * beGreaterThan (checks a number is greater than another)
 * beGreaterThanOrEqualTo (checks a number is greater than or equal to another)
 * beOnThePage (checks that an element is present on a page)
+
+## Other supported features
+
+* Before callbacks
 
 ## What's it do?
 

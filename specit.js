@@ -30,9 +30,20 @@
 
   var SpecIt = {
     currentExpectation: 'should',
-    describe:     function(description, body) { module(description); body(); },
-    it:           function(description, body) { test(description, body); },
-    asyncIt:      function(description, body) { asyncTest(description, body); },
+    describe: function(description, body) {
+      this.currentTests = [];
+      this.currentBefore = function() {};
+      body();
+      module(description, {setup: this.currentBefore});
+      $.each(this.currentTests, function(i, currentTest) { currentTest(); });
+    },
+    it: function(description, body) {
+      currentTests.push(function() { test(description, body); });
+    },
+    asyncIt: function(description, body) {
+      currentTests.push(function() { asyncTest(description, body); });
+    },
+    before: function(callback) { this.currentBefore = callback; },
     expectations: function(current) {
       var expect = function(expectation, args) {
         var args = $.makeArray(args);
@@ -194,4 +205,5 @@
   window.describe = SpecIt.describe;
   window.it       = SpecIt.it;
   window.asyncIt  = SpecIt.asyncIt;
+  window.before   = SpecIt.before;
 })();
