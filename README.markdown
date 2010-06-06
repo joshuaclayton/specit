@@ -32,6 +32,7 @@ I don't have the patience to write my own JS testing framework so I figured I'd 
 * beA, beAn (checks type)
 * match (checks against a regular expression)
 * respondTo (checks that a function exists)
+* beLessThan (checks a number is less than another)
 
 ## What's it do?
 

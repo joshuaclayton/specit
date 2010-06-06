@@ -102,4 +102,15 @@ describe("SpecIt", function() {
     john.shouldNot(respondTo, "age");
     john.shouldNot(respondTo, "sayGoodbye");
   });
+
+  it("should match on less than", function() {
+    (  2).should(beLessThan, 5);
+    ( -5).should(beLessThan, 0);
+    (  0).should(beLessThan, 0.1);
+    "awesome".should(beLessThan, "great");
+    (  5).shouldNot(beLessThan, 3);
+    (0.1).shouldNot(beLessThan, 0);
+    (0.1).shouldNot(beLessThan, 0.05);
+    (  5).shouldNot(beLessThan, 5);
+  });
 });

@@ -83,7 +83,8 @@
         beA:         "Expected {actual} {not} to be a",
         beAn:        "Expected {actual} {not} to be an",
         match:       "Expected {actual} {not} to match {expected}",
-        respondTo:   "Expected {expected} {not} to be a method of {actual}"
+        respondTo:   "Expected {expected} {not} to be a method of {actual}",
+        beLessThan:   "Expected {actual} {not} to be less than {expected}"
       }, message, options = arguments[3];
 
       message = matcherMessages[matcher];
@@ -146,6 +147,12 @@
       respondTo: function() {
         Matcher("respondTo", "ok",
                 {assert: typeof this[arguments[0]] === "function",
+                 expected: {value: arguments[0], parse: true},
+                 actual:   {value: this, parse: true}});
+      },
+      beLessThan: function() {
+        Matcher("beLessThan", "ok",
+                {assert: this < arguments[0],
                  expected: {value: arguments[0], parse: true},
                  actual:   {value: this, parse: true}});
       },
