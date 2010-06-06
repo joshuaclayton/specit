@@ -6,7 +6,7 @@ Let's face it: [QUnit](http://github.com/jquery/qunit) is pretty awesome, but ju
 
 I don't have the patience to write my own JS testing framework so I figured I'd piggyback off of what QUnit provides.
 
-## Examples
+## Example
 
     describe("SpecIt", function() {
       it("should match on inclusion", function() {
@@ -22,6 +22,16 @@ I don't have the patience to write my own JS testing framework so I figured I'd 
         ({}).should(beAn, Object);
       });
     });
+
+## Supported Matchers
+
+* include (checks presence within an object)
+* eql (checks equality with QUnit's equal)
+* beSimilarTo (checks equality with QUnit's deepEqual)
+* be (asserts true)
+* beA, beAn (checks type)
+* match (checks against a regular expression)
+* respondTo (checks that a function exists)
 
 ## What's it do?
 
