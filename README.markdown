@@ -34,6 +34,7 @@ I don't have the patience to write my own JS testing framework so I figured I'd 
 * respondTo (checks that a function exists)
 * beLessThan (checks a number is less than another)
 * beLessThanOrEqualTo (checks a number is less than or equal to another)
+* beGreaterThan (checks a number is greater than another)
 
 ## What's it do?
 

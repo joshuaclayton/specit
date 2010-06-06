@@ -85,7 +85,8 @@
         match:       "Expected {actual} {not} to match {expected}",
         respondTo:   "Expected {expected} {not} to be a method of {actual}",
         beLessThan:   "Expected {actual} {not} to be less than {expected}",
-        beLessThanOrEqualTo: "Expected {actual} {not} to be less than or equal to {expected}"
+        beLessThanOrEqualTo: "Expected {actual} {not} to be less than or equal to {expected}",
+        beGreaterThan: "Expected {actual} {not} to be greater than {expected}",
       }, message, options = arguments[3];
 
       message = matcherMessages[matcher];
@@ -160,6 +161,12 @@
       beLessThanOrEqualTo: function() {
         Matcher("beLessThanOrEqualTo", "ok",
                 {assert: this <= arguments[0],
+                 expected: {value: arguments[0], parse: true},
+                 actual:   {value: this, parse: true}});
+      },
+      beGreaterThan: function() {
+        Matcher("beGreaterThan", "ok",
+                {assert: this > arguments[0],
                  expected: {value: arguments[0], parse: true},
                  actual:   {value: this, parse: true}});
       },

@@ -127,4 +127,15 @@ describe("SpecIt", function() {
     (0.1).shouldNot(beLessThanOrEqualTo, 0);
     (0.1).shouldNot(beLessThanOrEqualTo, 0.05);
   });
+
+  it("should match on greater than", function() {
+    (  2).should(beGreaterThan, 1);
+    ( -5).should(beGreaterThan, -10);
+    (  0).should(beGreaterThan, -0.1);
+    "awesome".should(beGreaterThan, "absolute");
+    (  5).shouldNot(beGreaterThan, 30);
+    (0.1).shouldNot(beGreaterThan, 0.2);
+    (0.01).shouldNot(beGreaterThan, 0.05);
+    (  5).shouldNot(beGreaterThan, 5);
+  });
 });
