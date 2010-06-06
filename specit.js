@@ -33,8 +33,9 @@
     describe: function(description, body) {
       this.currentTests = [];
       this.currentBefore = function() {};
+      this.currentAfter  = function() {};
       body();
-      module(description, {setup: this.currentBefore});
+      module(description, {setup: this.currentBefore, teardown: this.currentAfter});
       $.each(this.currentTests, function(i, currentTest) { currentTest(); });
     },
     it: function(description, body) {
@@ -44,6 +45,7 @@
       currentTests.push(function() { asyncTest(description, body); });
     },
     before: function(callback) { this.currentBefore = callback; },
+    after:  function(callback) { this.currentAfter  = callback; },
     expectations: function(current) {
       var expect = function(expectation, args) {
         var args = $.makeArray(args);
@@ -206,4 +208,5 @@
   window.it       = SpecIt.it;
   window.asyncIt  = SpecIt.asyncIt;
   window.before   = SpecIt.before;
+  window.after    = SpecIt.after;
 })();

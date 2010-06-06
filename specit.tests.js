@@ -159,7 +159,7 @@ describe("SpecIt", function() {
   });
 });
 
-var john, beforeCallbackTest, afterCallbackTest;
+var john, beforeCallbackTest;
 
 describe("SpecIt with a before callback", function() {
   var jane = {name: "Jane"};
@@ -208,5 +208,26 @@ describe("SpecIt with a different before callback", function() {
 
   it("should not know of other objects in a different describe", function() {
     equals(typeof jane, "undefined");
+  });
+});
+
+describe("SpecIt with an after callback", function() {
+  var changedFromAfterCallback = "unchanged";
+
+  after(function() {
+    changedFromAfterCallback = "changed";
+  });
+
+  it("should not call after callback until after a test is run", function() {
+    equals(changedFromAfterCallback, "unchanged");
+  });
+
+  it("should call the after callback the first test is run", function() {
+    equals(changedFromAfterCallback, "changed");
+    changedFromAfterCallback = "bogus";
+  });
+
+  it("should call the after callback after each test is run", function() {
+    equals(changedFromAfterCallback, "changed");
   });
 });

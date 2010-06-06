@@ -57,6 +57,7 @@ I don't have the patience to write my own JS testing framework so I figured I'd 
 ## Other supported features
 
 * Before callbacks
+* After callbacks
 
 ## What's it do?
 
