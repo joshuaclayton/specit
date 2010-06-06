@@ -9,16 +9,22 @@ I don't have the patience to write my own JS testing framework so I figured I'd 
 ## Example
 
     describe("SpecIt", function() {
-      var john;
+      var john, cachedItems = [];
 
       before(function() {
         john = {name: "John Doe", age: 26};
+      });
+
+      after(function() {
+        cachedItems = [];
       });
 
       it("should match on inclusion", function() {
         [1, 2].should(include, 1, 2);
         ({one: 1, two: 2}).should(include, "one");
         "string".should(include, "str");
+        cachedItems.push(1);
+        cachedItems.should(include, 1);
       });
 
       it("should match by type comparison", function() {
@@ -36,6 +42,10 @@ I don't have the patience to write my own JS testing framework so I figured I'd 
       it("should use before blocks", function() {
         john.name.should(eql, "John Doe");
         john.age.should(beLessThan, 30);
+      });
+
+      it("should run after callbacks", function() {
+        cachedItems.should(beSimilarTo, []);
       });
     });
 
