@@ -102,6 +102,7 @@
         beGreaterThan:          "Expected {actual} {not} to be greater than {expected}",
         beGreaterThanOrEqualTo: "Expected {actual} {not} to be greater than or equal to {expected}",
         beOnThePage:            "Expected {actual} {not} to be on the page",
+        beEmpty:                "Expected {actual} {not} to be empty",
       }, message, options = arguments[3];
 
       message = matcherMessages[matcher];
@@ -196,6 +197,21 @@
                 {assert: $(this).length > 0,
                  expected: {value: arguments[0], parse: true},
                  actual:   {value: $(this).selector, parse: true}});
+      },
+      beEmpty: function() {
+        var empty = true;
+        if (this.constructor == Object && this.length == undefined) {
+          for(var key in this) {
+            if(!/should|shouldNot|indexOf/.test(key)) { empty = false; }
+          }
+        } else {
+          if(this.length > 0) { empty = false; }
+        }
+
+        Matcher("beEmpty", "ok",
+                {assert: empty,
+                 expected: {value: arguments[0], parse: true},
+                 actual:   {value: this, parse: true}});
       },
     }
   });

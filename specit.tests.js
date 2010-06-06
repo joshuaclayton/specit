@@ -150,9 +150,19 @@ describe("SpecIt", function() {
     (0.01).shouldNot(beGreaterThanOrEqualTo, 0.05);
   });
 
+  it("should match on emptiness", function() {
+    [].should(beEmpty);
+    ({}).should(beEmpty);
+    (0).should(beEmpty);
+    (5).should(beEmpty);
+    "".should(beEmpty);
+    [1, 2].shouldNot(beEmpty);
+    ({one: 1}).shouldNot(beEmpty);
+    "one".shouldNot(beEmpty);
+  });
+
   it("should match on elements on a page", function() {
    $(".workspace").append("<div class='great'>");
-
    $(".workspace .great").should(beOnThePage);
    $(".workspace .non-existant").shouldNot(beOnThePage);
    $(".workspace").empty();
