@@ -159,7 +159,7 @@ describe("SpecIt", function() {
   });
 });
 
-var john, beforeCallbackTest;
+var john, beforeCallbackTest, afterCallbackTest;
 
 describe("SpecIt with a before callback", function() {
   var jane = {name: "Jane"};
