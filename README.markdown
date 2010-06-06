@@ -35,6 +35,7 @@ I don't have the patience to write my own JS testing framework so I figured I'd 
 * beLessThan (checks a number is less than another)
 * beLessThanOrEqualTo (checks a number is less than or equal to another)
 * beGreaterThan (checks a number is greater than another)
+* beGreaterThanOrEqualTo (checks a number is greater than or equal to another)
 
 ## What's it do?
 

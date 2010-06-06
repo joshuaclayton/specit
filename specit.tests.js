@@ -138,4 +138,15 @@ describe("SpecIt", function() {
     (0.01).shouldNot(beGreaterThan, 0.05);
     (  5).shouldNot(beGreaterThan, 5);
   });
+
+  it("should match on greater than or equal to", function() {
+    (  2).should(beGreaterThanOrEqualTo, 1);
+    ( -5).should(beGreaterThanOrEqualTo, -10);
+    (  0).should(beGreaterThanOrEqualTo, -0.1);
+    (  5).should(beGreaterThanOrEqualTo, 5);
+    "awesome".should(beGreaterThanOrEqualTo, "awesome");
+    (  5).shouldNot(beGreaterThanOrEqualTo, 30);
+    (0.1).shouldNot(beGreaterThanOrEqualTo, 0.2);
+    (0.01).shouldNot(beGreaterThanOrEqualTo, 0.05);
+  });
 });
