@@ -149,4 +149,12 @@ describe("SpecIt", function() {
     (0.1).shouldNot(beGreaterThanOrEqualTo, 0.2);
     (0.01).shouldNot(beGreaterThanOrEqualTo, 0.05);
   });
+
+  it("should match on elements on a page", function() {
+   $(".workspace").append("<div class='great'>");
+
+   $(".workspace .great").should(beOnThePage);
+   $(".workspace .non-existant").shouldNot(beOnThePage);
+   $(".workspace").empty();
+  });
 });

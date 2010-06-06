@@ -76,18 +76,19 @@
   $.extend(SpecIt, {
     expectationMessage: function(matcher, expected, actual) {
       var matcherMessages = {
-        include:     "Expected {actual} {not} to include {expected}",
-        eql:         "Expected {actual} {not} to equal",
-        beSimilarTo: "Expected {actual} {not} to be the same as",
-        be:          "Expected {actual} {not} to be true",
-        beA:         "Expected {actual} {not} to be a",
-        beAn:        "Expected {actual} {not} to be an",
-        match:       "Expected {actual} {not} to match {expected}",
-        respondTo:   "Expected {expected} {not} to be a method of {actual}",
-        beLessThan:   "Expected {actual} {not} to be less than {expected}",
-        beLessThanOrEqualTo: "Expected {actual} {not} to be less than or equal to {expected}",
-        beGreaterThan: "Expected {actual} {not} to be greater than {expected}",
+        include:                "Expected {actual} {not} to include {expected}",
+        eql:                    "Expected {actual} {not} to equal",
+        beSimilarTo:            "Expected {actual} {not} to be the same as",
+        be:                     "Expected {actual} {not} to be true",
+        beA:                    "Expected {actual} {not} to be a",
+        beAn:                   "Expected {actual} {not} to be an",
+        match:                  "Expected {actual} {not} to match {expected}",
+        respondTo:              "Expected {expected} {not} to be a method of {actual}",
+        beLessThan:             "Expected {actual} {not} to be less than {expected}",
+        beLessThanOrEqualTo:    "Expected {actual} {not} to be less than or equal to {expected}",
+        beGreaterThan:          "Expected {actual} {not} to be greater than {expected}",
         beGreaterThanOrEqualTo: "Expected {actual} {not} to be greater than or equal to {expected}",
+        beOnThePage:            "Expected {actual} {not} to be on the page",
       }, message, options = arguments[3];
 
       message = matcherMessages[matcher];
@@ -176,6 +177,12 @@
                 {assert: this >= arguments[0],
                  expected: {value: arguments[0], parse: true},
                  actual:   {value: this, parse: true}});
+      },
+      beOnThePage: function() {
+        Matcher("beOnThePage", "ok",
+                {assert: $(this).length > 0,
+                 expected: {value: arguments[0], parse: true},
+                 actual:   {value: $(this).selector, parse: true}});
       },
     }
   });
