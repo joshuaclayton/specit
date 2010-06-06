@@ -231,3 +231,18 @@ describe("SpecIt with an after callback", function() {
     equals(changedFromAfterCallback, "changed");
   });
 });
+
+describe("SpecIt handling before and after", function() {
+  before(function() { $("body").append("<div id='crazy'>"); });
+  after (function() { $("#crazy").remove(); });
+
+  it("should run before callbacks correctly", function() {
+    $("#crazy").html("awesome div");
+    $("#crazy:contains(awesome div)").should(beOnThePage);
+  });
+
+  it("should run after callbacks correctly", function() {
+    $("#crazy").length.should(eql, 1);
+    $("#crazy:contains(awesome div)").shouldNot(beOnThePage);
+  });
+});
