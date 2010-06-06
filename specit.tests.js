@@ -113,4 +113,18 @@ describe("SpecIt", function() {
     (0.1).shouldNot(beLessThan, 0.05);
     (  5).shouldNot(beLessThan, 5);
   });
+
+  it("should match on less than or equal to", function() {
+    (  2).should(beLessThanOrEqualTo, 5);
+    ( -5).should(beLessThanOrEqualTo, 0);
+    (  0).should(beLessThanOrEqualTo, 0.1);
+    (  5).should(beLessThanOrEqualTo, 5);
+    "awesome".should(beLessThanOrEqualTo, "great");
+    "great".should(beLessThanOrEqualTo, "great");
+    (0.1).should(beLessThanOrEqualTo, 0.1);
+
+    (  5).shouldNot(beLessThanOrEqualTo, 3);
+    (0.1).shouldNot(beLessThanOrEqualTo, 0);
+    (0.1).shouldNot(beLessThanOrEqualTo, 0.05);
+  });
 });
