@@ -266,11 +266,11 @@ describe("SpecIt should know relative positions", function() {
     $(".left-right-broken .left").shouldNot(beToTheLeftOf, ".left-right-broken .right");
   });
 
-  it("should know if an element is completely to the left of another", function() {
-    $(".left-right-correct .left").should(beCompletelyToTheLeftOf, ".left-right-correct .right");
-    $(".left-right-correct .text-1").shouldNot(beCompletelyToTheLeftOf, ".left-right-correct .text-2");
+  it("should know if an element is to the right of", function() {
+    $(".left-right-correct .right").should(beToTheRightOf, ".left-right-correct .left");
+    $(".left-right-correct .text-2").shouldNot(beToTheRightOf, ".left-right-correct .text-1");
 
-    $(".left-right-correct .right").shouldNot(beCompletelyToTheLeftOf, ".left-right-correct .left");
-    $(".left-right-broken .left").shouldNot(beCompletelyToTheLeftOf, ".left-right-broken .right");
+    $(".left-right-correct .left").shouldNot(beToTheRightOf, ".left-right-correct .right");
+    $(".left-right-broken .right").shouldNot(beToTheRightOf, ".left-right-broken .left");
   });
 });
