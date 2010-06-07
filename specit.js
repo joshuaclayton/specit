@@ -100,7 +100,8 @@
         beGreaterThanOrEqualTo: "Expected {actual} {not} to be greater than or equal to {expected}",
         beOnThePage:            "Expected {actual} {not} to be on the page",
         beEmpty:                "Expected {actual} {not} to be empty",
-        beToTheLeftOf:          "Expected {actual} {not} to be to the left of",
+        beToTheLeftOf:          "Expected {actual} {not} to be to the left of {expected}",
+        beCompletelyToTheLeftOf:"Expected {actual} {not} to be completely to the left of {expected}",
       }, message, options = arguments[3];
 
       message = matcherMessages[matcher];
@@ -218,7 +219,15 @@
       beToTheLeftOf: function() {
         Matcher("beToTheLeftOf", "ok",
                 {assert: $(this).offset().left < $(arguments[0]).offset().left,
-                 expected: {value: arguments[0], parse: true},
+                 expected: {value: $(arguments[0]).selector, parse: true},
+                 actual:   {value: $(this).selector, parse: true}});
+      },
+      beCompletelyToTheLeftOf: function() {
+                                 console.log($(this).offset());
+                                 console.log($(arguments[0]).offset());
+        Matcher("beCompletelyToTheLeftOf", "ok",
+                {assert: ($(this).offset().left + $(this).width()) < $(arguments[0]).offset().left,
+                 expected: {value: $(arguments[0]).selector, parse: true},
                  actual:   {value: $(this).selector, parse: true}});
       },
     }
