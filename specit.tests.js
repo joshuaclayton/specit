@@ -273,4 +273,12 @@ describe("SpecIt should know relative positions", function() {
     $(".left-right-correct .left").shouldNot(beToTheRightOf, ".left-right-correct .right");
     $(".left-right-broken .right").shouldNot(beToTheRightOf, ".left-right-broken .left");
   });
+
+  it("should know if an element is to the above", function() {
+    $(".left-right-broken .left").should(beAbove, ".left-right-broken .right");
+    $(".left-right-correct .text-2").shouldNot(beAbove, ".left-right-correct .text-1");
+
+    $(".left-right-correct .left").shouldNot(beAbove, ".left-right-correct .right");
+    $(".left-right-correct .right").shouldNot(beAbove, ".left-right-correct .left");
+  });
 });

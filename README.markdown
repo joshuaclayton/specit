@@ -66,6 +66,7 @@ I don't have the patience to write my own JS testing framework so I figured I'd 
 * beOnThePage (checks that an element is present on a page)
 * beToTheLeftOf (checks that an element is to the left of another element)
 * beToTheRightOf (checks that an element is to the right of another element)
+* beAbove (checks that an element is above another element)
 
 ## Other supported features
 

@@ -102,6 +102,7 @@
         beEmpty:                "Expected {actual} {not} to be empty",
         beToTheLeftOf:          "Expected {actual} {not} to be to the left of {expected}",
         beToTheRightOf:         "Expected {actual} {not} to be to the right of {expected}",
+        beAbove:                "Expected {actual} {not} to be above {expected}",
       }, message, options = arguments[3];
 
       message = matcherMessages[matcher];
@@ -225,6 +226,12 @@
       beToTheRightOf: function() {
         Matcher("beToTheRightOf", "ok",
                 {assert: ($(this).offset().left > ($(arguments[0]).offset().left + $(arguments[0]).width())),
+                 expected: {value: $(arguments[0]).selector, parse: true},
+                 actual:   {value: $(this).selector, parse: true}});
+      },
+      beAbove: function() {
+        Matcher("beAbove", "ok",
+                {assert: $(this).offset().top < $(arguments[0]).offset().top,
                  expected: {value: $(arguments[0]).selector, parse: true},
                  actual:   {value: $(this).selector, parse: true}});
       },
