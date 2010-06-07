@@ -64,6 +64,7 @@ I don't have the patience to write my own JS testing framework so I figured I'd 
 * beGreaterThanOrEqualTo (checks a number is greater than or equal to another)
 * beEmpty (checks if an array, object literal, or string is empty)
 * beOnThePage (checks that an element is present on a page)
+* beToTheLeftOf (checks that an element is to the left of another element)
 
 ## Other supported features
 

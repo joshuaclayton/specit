@@ -256,3 +256,13 @@ describe("SpecIt handling before and after", function() {
     $("#crazy:contains(awesome div)").shouldNot(beOnThePage);
   });
 });
+
+describe("SpecIt should know relative positions", function() {
+  it("should know if an element is to the left of another", function() {
+    $(".left-right-correct .left").should(beToTheLeftOf, ".left-right-correct .right");
+    $(".left-right-correct .text-1").should(beToTheLeftOf, ".left-right-correct .text-2");
+
+    $(".left-right-correct .right").shouldNot(beToTheLeftOf, ".left-right-correct .left");
+    $(".left-right-broken .left").shouldNot(beToTheLeftOf, ".left-right-broken .right");
+  });
+});

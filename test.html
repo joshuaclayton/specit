@@ -7,6 +7,15 @@
     <script type="text/javascript" src="qunit.js"></script>
     <script type="text/javascript" src="specit.js"></script>
     <script type="text/javascript" src="specit.tests.js"></script>
+    <style type="text/css">
+      .column { float: left; margin: 0 10% 0 0; }
+      .last { margin-right: 0; }
+      .left { background-color: blue; }
+      .right { background-color: red; }
+
+      .column-test { clear: both; border-bottom: 10px solid black; }
+      .column-test .column { height: 50px; }
+    </style>
   </head>
   <body>
     <h1 id="qunit-header">SpecIt</h1>
@@ -14,5 +23,17 @@
     <h2 id="qunit-userAgent"></h2>
     <ol id="qunit-tests"></ol>
     <div class="workspace"></div>
+    <div class="layout-tests">
+      <div class="left-right-correct column-test">
+        <div class="text-1">Text</div>
+        <div class="text-2" style="margin-left: 1px">Text</div>
+        <div class="column left" style="width: 60%;"></div>
+        <div class="column right last" style="width: 30%;"></div>
+      </div>
+      <div class="left-right-broken column-test">
+        <div class="column left" style="width: 60%;"></div>
+        <div class="column right last" style="width: 50%;"></div>
+      </div>
+    </div>
   </body>
 </html>
