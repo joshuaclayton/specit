@@ -9,9 +9,6 @@
   function nativeShould()    { return objectToSpecIt.call(this, "should", arguments); }
   function nativeShouldNot() { return objectToSpecIt.call(this, "shouldNot", arguments); }
 
-  Object.prototype.indexOf = function(key) {
-    if(key in this) { return 0; } else { return -1; }
-  };
   String.prototype.  should    = nativeShould;
   Array.prototype.   should    = nativeShould;
   Function.prototype.should    = nativeShould;
@@ -120,9 +117,13 @@
     matchers: {
       include: function() {
         var args = $.makeArray(arguments), expectation = true, actual = this;
-
         $.each(args, function(i, item) {
-          if(actual.indexOf(item) < 0) { expectation = false; }
+          if(actual.constructor == Object && actual.length == undefined) {
+            expectation = false;
+            if(item in actual) { expectation = true; }
+          } else {
+            if(actual.indexOf(item) < 0) { expectation = false; }
+          }
         });
 
         Matcher("include", "ok",
@@ -202,7 +203,7 @@
         var empty = true;
         if (this.constructor == Object && this.length == undefined) {
           for(var key in this) {
-            if(!/should|shouldNot|indexOf/.test(key)) { empty = false; }
+            if(!/should|shouldNot/.test(key)) { empty = false; }
           }
         } else {
           if(this.length > 0) { empty = false; }
