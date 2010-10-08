@@ -20,32 +20,32 @@ I don't have the patience to write my own JS testing framework so I figured I'd 
       });
 
       it("should match on inclusion", function() {
-        [1, 2].should(include, 1, 2);
-        ({one: 1, two: 2}).should(include, "one");
-        "string".should(include, "str");
+        assert([1, 2]).should(include, 1, 2);
+        assert({one: 1, two: 2}).should(include, "one");
+        assert("string").should(include, "str");
         cachedItems.push(1);
-        cachedItems.should(include, 1);
+        assert(cachedItems).should(include, 1);
       });
 
       it("should match by type comparison", function() {
-        "string".should(beA, String);
-        (function() {}).should(beA, Function);
-        true.should(beA, Boolean);
-        ({}).should(beAn, Object);
+        assert("string").should(beA, String);
+        assert(function() {}).should(beA, Function);
+        assert(true).should(beA, Boolean);
+        assert({}).should(beAn, Object);
       });
 
       it("allows overriding variables", function() {
         john = {};
-        john.shouldNot(include, "name");
+        assert(john).shouldNot(include, "name");
       });
 
       it("should use before blocks", function() {
-        john.name.should(eql, "John Doe");
-        john.age.should(beLessThan, 30);
+        assert(john.name).should(eql, "John Doe");
+        assert(john.age).should(beLessThan, 30);
       });
 
       it("should run after callbacks", function() {
-        cachedItems.should(beSimilarTo, []);
+        assert(cachedItems).should(beSimilarTo, []);
       });
     });
 

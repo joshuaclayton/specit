@@ -1,78 +1,78 @@
 describe("SpecIt", function() {
   it("should match on inclusion", function() {
-    [1, 2].should(include, 1);
-    [1, 2].should(include, 1, 2);
-    ({one: 1, two: 2}).should(include, "one");
+    assert([1, 2]).should(include, 1);
+    assert([1, 2]).should(include, 1, 2);
+    assert({one: 1, two: 2}).should(include, "one");
 
-    [1, 2].shouldNot(include, [1, 2]);
-    [1, 2].shouldNot(include, [1, 2], 1, 2);
-    [1, 2].shouldNot(include, 3);
-    [1, 2].shouldNot(include, 3, 4);
-    ({one: 1}).shouldNot(include, "two");
+    assert([1, 2]).shouldNot(include, [1, 2]);
+    assert([1, 2]).shouldNot(include, [1, 2], 1, 2);
+    assert([1, 2]).shouldNot(include, 3);
+    assert([1, 2]).shouldNot(include, 3, 4);
+    assert({one: 1}).shouldNot(include, "two");
 
-    "string".should(include, "string");
-    "string".should(include, "ring");
-    "string".should(include, "tr");
+    assert("string").should(include, "string");
+    assert("string").should(include, "ring");
+    assert("string").should(include, "tr");
 
-    "string".shouldNot(include, "  string");
-    "string".shouldNot(include, "string ");
-    "string".shouldNot(include, "cat");
+    assert("string").shouldNot(include, "  string");
+    assert("string").shouldNot(include, "string ");
+    assert("string").shouldNot(include, "cat");
   });
 
   it("should match on equality", function() {
-    "string".should(eql, "string");
-    (1).should(eql, 1);
-    true.should(eql, true);
+    assert("string").should(eql, "string");
+    assert(1).should(eql, 1);
+    assert(true).should(eql, true);
 
-    "string".shouldNot(eql, "junk");
-    [].shouldNot(eql, []);
-    ["tree"].shouldNot(eql, ["tree"]);
-    ({}).shouldNot(eql, {});
-    true.shouldNot(eql, false);
+    assert("string").shouldNot(eql, "junk");
+    assert([]).shouldNot(eql, []);
+    assert(["tree"]).shouldNot(eql, ["tree"]);
+    assert({}).shouldNot(eql, {});
+    assert(true).shouldNot(eql, false);
   });
 
   it("should match on similarity", function() {
-    "string".should(beSimilarTo, "string");
-    (1).should(beSimilarTo, 1);
-    true.should(beSimilarTo, true);
-    [].should(beSimilarTo, []);
-    ["tree"].should(beSimilarTo, ["tree"]);
-    ({}).should(beSimilarTo, {});
-    ({a: 1}).should(beSimilarTo, {"a": 1});
+    assert("string").should(beSimilarTo, "string");
+    assert(1).should(beSimilarTo, 1);
+    assert(true).should(beSimilarTo, true);
+    assert([]).should(beSimilarTo, []);
+    assert(["tree"]).should(beSimilarTo, ["tree"]);
+    assert({}).should(beSimilarTo, {});
+    assert({a: 1}).should(beSimilarTo, {"a": 1});
 
-    "string".shouldNot(beSimilarTo, "junk");
-    true.shouldNot(beSimilarTo, false);
-    ({a: 1}).shouldNot(beSimilarTo, {b: 1});
+    assert("string").shouldNot(beSimilarTo, "junk");
+    assert(true).shouldNot(beSimilarTo, false);
+    assert({a: 1}).shouldNot(beSimilarTo, {b: 1});
   });
 
   it("should match on truthiness", function() {
-    "string".should(be);
-    true.should(be);
-    (1).should(be);
+    assert("string").should(be);
+    assert(true).should(be);
+    assert(1).should(be);
 
-    "".shouldNot(be);
-    false.shouldNot(be);
-    (0).shouldNot(be);
+    assert("").shouldNot(be);
+    assert(false).shouldNot(be);
+    assert(0).shouldNot(be);
   });
 
   it("should match by type comparison", function() {
-    "string".should(beA, String);
-    (function() {}).should(beA, Function);
-    true.should(beA, Boolean);
-    ({}).should(beAn, Object);
-    [].should(beAn, Array);
-    (1).should(beA, Number);
-    /regular-expression/.should(beA, RegExp);
+    assert("string").should(beA, String);
+    assert(function() {}).should(beA, Function);
+    assert(true).should(beA, Boolean);
+    assert({}).should(beAn, Object);
+    assert([]).should(beAn, Array);
+    assert(1).should(beA, Number);
+    assert(/regular-expression/).should(beA, RegExp);
 
-    "string".shouldNot(beAn, Object);
-    "string".shouldNot(beA, Number);
-    [].shouldNot(beAn, Object);
+    assert("string").shouldNot(beAn, Object);
+    assert("string").shouldNot(beA, Number);
+    assert([]).shouldNot(beAn, Object);
   });
 
   it("should match against regular expressions", function() {
-    "string".should(match, /string/);
-    "202-555-1212".should(match, /\d{3}.\d{3}.\d{4}/);
-    "string".shouldNot(match, /\w{10}/);
+    assert("string").should(match, /string/);
+    assert("202-555-1212").should(match, /\d{3}.\d{3}.\d{4}/);
+    assert("string").shouldNot(match, /\\\\w{10}/);
   });
 
   it("should match on method presence", function() {
@@ -82,10 +82,10 @@ describe("SpecIt", function() {
       methodAttr: function() {}
     };
 
-    myObject.should(respondTo, "methodAttr");
-    myObject.shouldNot(respondTo, "attribute1");
-    myObject.shouldNot(respondTo, "booleanAttr");
-    myObject.shouldNot(respondTo, "junkMethod");
+    assert(myObject).should(respondTo, "methodAttr");
+    assert(myObject).shouldNot(respondTo, "attribute1");
+    assert(myObject).shouldNot(respondTo, "booleanAttr");
+    assert(myObject).shouldNot(respondTo, "junkMethod");
 
     var Person = function(options) {
       this.name = options.name || "";
@@ -97,75 +97,79 @@ describe("SpecIt", function() {
     };
 
     var john = new Person({name: "John Doe", age: 35});
-    john.should(respondTo, "sayHi");
-    john.shouldNot(respondTo, "name");
-    john.shouldNot(respondTo, "age");
-    john.shouldNot(respondTo, "sayGoodbye");
+    assert(john).should(respondTo, "sayHi");
+    assert(john).shouldNot(respondTo, "name");
+    assert(john).shouldNot(respondTo, "age");
+    assert(john).shouldNot(respondTo, "sayGoodbye");
   });
 
   it("should match on less than", function() {
-    (  2).should(beLessThan, 5);
-    ( -5).should(beLessThan, 0);
-    (  0).should(beLessThan, 0.1);
-    "awesome".should(beLessThan, "great");
-    (  5).shouldNot(beLessThan, 3);
-    (0.1).shouldNot(beLessThan, 0);
-    (0.1).shouldNot(beLessThan, 0.05);
-    (  5).shouldNot(beLessThan, 5);
+    assert(  2).should(beLessThan, 5);
+    assert( -5).should(beLessThan, 0);
+    assert(  0).should(beLessThan, 0.1);
+    assert(  5).shouldNot(beLessThan, 3);
+    assert(0.1).shouldNot(beLessThan, 0);
+    assert(0.1).shouldNot(beLessThan, 0.05);
+    assert(  5).shouldNot(beLessThan, 5);
+
+    assert("awesome").should(beLessThan, "great");
   });
 
   it("should match on less than or equal to", function() {
-    (  2).should(beLessThanOrEqualTo, 5);
-    ( -5).should(beLessThanOrEqualTo, 0);
-    (  0).should(beLessThanOrEqualTo, 0.1);
-    (  5).should(beLessThanOrEqualTo, 5);
-    "awesome".should(beLessThanOrEqualTo, "great");
-    "great".should(beLessThanOrEqualTo, "great");
-    (0.1).should(beLessThanOrEqualTo, 0.1);
+    assert(  2).should(beLessThanOrEqualTo, 5);
+    assert( -5).should(beLessThanOrEqualTo, 0);
+    assert(  0).should(beLessThanOrEqualTo, 0.1);
+    assert(  5).should(beLessThanOrEqualTo, 5);
+    assert(0.1).should(beLessThanOrEqualTo, 0.1);
 
-    (  5).shouldNot(beLessThanOrEqualTo, 3);
-    (0.1).shouldNot(beLessThanOrEqualTo, 0);
-    (0.1).shouldNot(beLessThanOrEqualTo, 0.05);
+    assert(  5).shouldNot(beLessThanOrEqualTo, 3);
+    assert(0.1).shouldNot(beLessThanOrEqualTo, 0);
+    assert(0.1).shouldNot(beLessThanOrEqualTo, 0.05);
+
+    assert("awesome").should(beLessThanOrEqualTo, "great");
+    assert("great").should(beLessThanOrEqualTo, "great");
   });
 
   it("should match on greater than", function() {
-    (  2).should(beGreaterThan, 1);
-    ( -5).should(beGreaterThan, -10);
-    (  0).should(beGreaterThan, -0.1);
-    "awesome".should(beGreaterThan, "absolute");
-    (  5).shouldNot(beGreaterThan, 30);
-    (0.1).shouldNot(beGreaterThan, 0.2);
-    (0.01).shouldNot(beGreaterThan, 0.05);
-    (  5).shouldNot(beGreaterThan, 5);
+    assert(  2).should(beGreaterThan, 1);
+    assert( -5).should(beGreaterThan, -10);
+    assert(  0).should(beGreaterThan, -0.1);
+    assert(  5).shouldNot(beGreaterThan, 30);
+    assert(0.1).shouldNot(beGreaterThan, 0.2);
+    assert(0.01).shouldNot(beGreaterThan, 0.05);
+    assert(  5).shouldNot(beGreaterThan, 5);
+
+    assert("awesome").should(beGreaterThan, "absolute");
   });
 
   it("should match on greater than or equal to", function() {
-    (  2).should(beGreaterThanOrEqualTo, 1);
-    ( -5).should(beGreaterThanOrEqualTo, -10);
-    (  0).should(beGreaterThanOrEqualTo, -0.1);
-    (  5).should(beGreaterThanOrEqualTo, 5);
-    "awesome".should(beGreaterThanOrEqualTo, "awesome");
-    (  5).shouldNot(beGreaterThanOrEqualTo, 30);
-    (0.1).shouldNot(beGreaterThanOrEqualTo, 0.2);
-    (0.01).shouldNot(beGreaterThanOrEqualTo, 0.05);
+    assert(  2).should(beGreaterThanOrEqualTo, 1);
+    assert( -5).should(beGreaterThanOrEqualTo, -10);
+    assert(  0).should(beGreaterThanOrEqualTo, -0.1);
+    assert(  5).should(beGreaterThanOrEqualTo, 5);
+    assert(  5).shouldNot(beGreaterThanOrEqualTo, 30);
+    assert(0.1).shouldNot(beGreaterThanOrEqualTo, 0.2);
+    assert(0.01).shouldNot(beGreaterThanOrEqualTo, 0.05);
+
+    assert("awesome").should(beGreaterThanOrEqualTo, "awesome");
   });
 
   it("should match on emptiness", function() {
-    [].should(beEmpty);
-    ({}).should(beEmpty);
-    (0).should(beEmpty);
-    (5).should(beEmpty);
-    "".should(beEmpty);
-    [1, 2].shouldNot(beEmpty);
-    ({one: 1}).shouldNot(beEmpty);
-    "one".shouldNot(beEmpty);
+    assert([]).should(beEmpty);
+    assert({}).should(beEmpty);
+    assert(0).should(beEmpty);
+    assert(5).should(beEmpty);
+    assert("").should(beEmpty);
+    assert([1, 2]).shouldNot(beEmpty);
+    assert({one: 1}).shouldNot(beEmpty);
+    assert("one").shouldNot(beEmpty);
   });
 
   it("should match on elements on a page", function() {
-   $(".workspace").append("<div class='great'>");
-   $(".workspace .great").should(beOnThePage);
-   $(".workspace .non-existant").shouldNot(beOnThePage);
-   $(".workspace").empty();
+    $(".workspace").append("<div class='great'>");
+    assert($(".workspace .great")).should(beOnThePage);
+    assert($(".workspace .non-existant")).shouldNot(beOnThePage);
+    $(".workspace").empty();
   });
 });
 
@@ -248,37 +252,37 @@ describe("SpecIt handling before and after", function() {
 
   it("should run before callbacks correctly", function() {
     $("#crazy").html("awesome div");
-    $("#crazy:contains(awesome div)").should(beOnThePage);
+    assert($("#crazy:contains(awesome div)")).should(beOnThePage);
   });
 
   it("should run after callbacks correctly", function() {
-    $("#crazy").length.should(eql, 1);
-    $("#crazy:contains(awesome div)").shouldNot(beOnThePage);
+    assert($("#crazy").length).should(eql, 1);
+    assert($("#crazy:contains(awesome div)")).shouldNot(beOnThePage);
   });
 });
 
 describe("SpecIt should know relative positions", function() {
   it("should know if an element is to the left of another", function() {
-    $(".left-right-correct .left").should(beToTheLeftOf, ".left-right-correct .right");
-    $(".left-right-correct .text-1").should(beToTheLeftOf, ".left-right-correct .text-2");
+    assert($(".left-right-correct .left")).should(beToTheLeftOf, ".left-right-correct .right");
+    assert($(".left-right-correct .text-1")).should(beToTheLeftOf, ".left-right-correct .text-2");
 
-    $(".left-right-correct .right").shouldNot(beToTheLeftOf, ".left-right-correct .left");
-    $(".left-right-broken .left").shouldNot(beToTheLeftOf, ".left-right-broken .right");
+    assert($(".left-right-correct .right")).shouldNot(beToTheLeftOf, ".left-right-correct .left");
+    assert($(".left-right-broken .left")).shouldNot(beToTheLeftOf, ".left-right-broken .right");
   });
 
   it("should know if an element is to the right of", function() {
-    $(".left-right-correct .right").should(beToTheRightOf, ".left-right-correct .left");
-    $(".left-right-correct .text-2").shouldNot(beToTheRightOf, ".left-right-correct .text-1");
+    assert($(".left-right-correct .right")).should(beToTheRightOf, ".left-right-correct .left");
+    assert($(".left-right-correct .text-2")).shouldNot(beToTheRightOf, ".left-right-correct .text-1");
 
-    $(".left-right-correct .left").shouldNot(beToTheRightOf, ".left-right-correct .right");
-    $(".left-right-broken .right").shouldNot(beToTheRightOf, ".left-right-broken .left");
+    assert($(".left-right-correct .left")).shouldNot(beToTheRightOf, ".left-right-correct .right");
+    assert($(".left-right-broken .right")).shouldNot(beToTheRightOf, ".left-right-broken .left");
   });
 
   it("should know if an element is to the above", function() {
-    $(".left-right-broken .left").should(beAbove, ".left-right-broken .right");
-    $(".left-right-correct .text-2").shouldNot(beAbove, ".left-right-correct .text-1");
+    assert($(".left-right-broken .left")).should(beAbove, ".left-right-broken .right");
+    assert($(".left-right-correct .text-2")).shouldNot(beAbove, ".left-right-correct .text-1");
 
-    $(".left-right-correct .left").shouldNot(beAbove, ".left-right-correct .right");
-    $(".left-right-correct .right").shouldNot(beAbove, ".left-right-correct .left");
+    assert($(".left-right-correct .left")).shouldNot(beAbove, ".left-right-correct .right");
+    assert($(".left-right-correct .right")).shouldNot(beAbove, ".left-right-correct .left");
   });
 });

@@ -6,27 +6,14 @@
     return SpecIt.expectations(this)[expectation].apply(this, matcherAndArgs);
   }
 
-  function nativeShould()    { return objectToSpecIt.call(this, "should", arguments); }
-  function nativeShouldNot() { return objectToSpecIt.call(this, "shouldNot", arguments); }
-
-  String.prototype.  should    = nativeShould;
-  Array.prototype.   should    = nativeShould;
-  Function.prototype.should    = nativeShould;
-  Number.prototype.  should    = nativeShould;
-  Boolean.prototype. should    = nativeShould;
-  Object.prototype.  should    = nativeShould;
-  $.fn.              should    = nativeShould;
-
-  String.prototype.  shouldNot = nativeShouldNot;
-  Array.prototype.   shouldNot = nativeShouldNot;
-  Function.prototype.shouldNot = nativeShouldNot;
-  Number.prototype.  shouldNot = nativeShouldNot;
-  Boolean.prototype. shouldNot = nativeShouldNot;
-  Object.prototype.  shouldNot = nativeShouldNot;
-  $.fn.              shouldNot = nativeShouldNot;
-
   var SpecIt = {
-    currentExpectation: 'should',
+    currentExpectation: "should",
+    assert: function(value) {
+      return {
+        should:    function() { return objectToSpecIt.call(value, "should", arguments); },
+        shouldNot: function() { return objectToSpecIt.call(value, "shouldNot", arguments); }
+      };
+    },
     describe: function(description, body) {
       this.currentTests = [];
       this.currentBefore = function() {};
@@ -205,11 +192,9 @@
       beEmpty: function() {
         var empty = true;
         if (this.constructor == Object && this.length == undefined) {
-          for(var key in this) {
-            if(!/should|shouldNot/.test(key)) { empty = false; }
-          }
+          for(var key in this) { empty = false; }
         } else {
-          if(this.length > 0) { empty = false; }
+          if(this.length > 0)  { empty = false; }
         }
 
         Matcher("beEmpty", "ok",
@@ -247,4 +232,5 @@
   window.asyncIt  = SpecIt.asyncIt;
   window.before   = SpecIt.before;
   window.after    = SpecIt.after;
+  window.assert   = SpecIt.assert;
 })();
