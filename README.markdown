@@ -77,6 +77,10 @@ I don't have the patience to write my own JS testing framework so I figured I'd 
 
 I wrote some matchers and used QUnit's module and test methods, that's all.  The test file is a great form of documentation and demonstrates everything SpecIt can do currently.
 
+## Running the tests
+
+Open test.html in your favorite web browser.  Qunit is a git submodule, so you'll want to grab it first.
+
 ## Note on Patches/Pull Requests
 
 * Fork the project.
