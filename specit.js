@@ -40,7 +40,7 @@
         should:    function() { return expect("should",    arguments); },
         shouldNot: function() { return expect("shouldNot", arguments); }
       }
-    },
+    }
   };
 
   var Matcher = function(expectation, assertion, options) {
@@ -89,7 +89,7 @@
         beEmpty:                "Expected {actual} {not} to be empty",
         beToTheLeftOf:          "Expected {actual} {not} to be to the left of {expected}",
         beToTheRightOf:         "Expected {actual} {not} to be to the right of {expected}",
-        beAbove:                "Expected {actual} {not} to be above {expected}",
+        beAbove:                "Expected {actual} {not} to be above {expected}"
       }, message, options = arguments[3];
 
       message = matcherMessages[matcher];
@@ -219,7 +219,7 @@
                 {assert: $(this).offset().top < $(arguments[0]).offset().top,
                  expected: {value: $(arguments[0]).selector, parse: true},
                  actual:   {value: $(this).selector, parse: true}});
-      },
+      }
     }
   });
 
