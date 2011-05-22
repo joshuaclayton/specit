@@ -9,7 +9,7 @@ I don't have the patience to write my own JS testing framework so I figured I'd 
 ## Example
 
     describe("SpecIt", function() {
-      var john, cachedItems = [];
+      var john, cachedItems = [], something = false;
 
       before(function() {
         john = {name: "John Doe", age: 26};
@@ -46,6 +46,17 @@ I don't have the patience to write my own JS testing framework so I figured I'd 
 
       it("should run after callbacks", function() {
         assert(cachedItems).should(beSimilarTo, []);
+      });
+
+      asyncIt("runs async tests correctly", function() {
+        setTimeout(function() {
+          something = true;
+        }, 50);
+
+        setTimeout(function() {
+          assert(something).should(be);
+          start();
+        }, 100);
       });
     });
 

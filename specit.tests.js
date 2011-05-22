@@ -286,3 +286,18 @@ describe("SpecIt should know relative positions", function() {
     assert($(".left-right-correct .right")).shouldNot(beAbove, ".left-right-correct .left");
   });
 });
+
+describe("SpecIt handles async tests", function() {
+  var something = false;
+
+  asyncIt("runs async tests correctly", function() {
+    setTimeout(function() {
+      something = true;
+    }, 50);
+
+    setTimeout(function() {
+      assert(something).should(be);
+      start();
+    }, 100);
+  });
+});
