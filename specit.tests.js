@@ -171,6 +171,29 @@ describe("SpecIt", function() {
     assert($(".workspace .non-existant")).shouldNot(beOnThePage);
     $(".workspace").empty();
   });
+
+  it("should test undefined value", function() {
+
+    assert(undefined).shouldNot(be);
+    assert(undefined).should(eql, undefined);
+    assert(undefined).should(eql, null);        // type conversion
+
+    assert(undefined).shouldNot(eql, 4);
+    assert(undefined).shouldNot(eql, window);
+    assert(undefined).shouldNot(eql, {});
+  });
+
+  it("should test null value", function() {
+
+    assert(null).shouldNot(be);
+    assert(null).should(eql, undefined);
+    assert(null).should(eql, null);             // type conversion
+
+    assert(null).shouldNot(eql, 4);
+    assert(null).shouldNot(eql, window);
+    assert(null).shouldNot(eql, {});
+  });
+
 });
 
 var john, beforeCallbackTest, afterCallbackTest;
