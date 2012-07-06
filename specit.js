@@ -1,4 +1,9 @@
 (function() {
+
+  var Wrapper = function(wrapped) {
+      this.wrapped = wrapped;
+  };
+
   function objectToSpecIt(expectation, args) {
     var args = $.makeArray(args),
         matcherAndArgs = [args.shift()];
@@ -9,6 +14,11 @@
   var SpecIt = {
     currentExpectation: "should",
     assert: function(value) {
+
+      if (value === undefined || value === null) {
+        value = new Wrapper(value);
+      }
+
       return {
         should:    function() { return objectToSpecIt.call(value, "should", arguments); },
         shouldNot: function() { return objectToSpecIt.call(value, "shouldNot", arguments); }
@@ -45,7 +55,7 @@
 
   var Matcher = function(expectation, assertion, options) {
     var expected = options.expected.value,
-        actual   = options.actual.value,
+        actual   = (options.actual.value instanceof Wrapper) ? options.actual.value.wrapped : options.actual.value,
         assert   = options.assert,
         messageOptions = {},
         message = SpecIt.expectationMessage(expectation,
@@ -94,7 +104,7 @@
 
       message = matcherMessages[matcher];
 
-      message = message.replace("{expected}", expected).replace("{actual}", JSON.stringify(actual));
+      message = message.replace("{expected}", expected).replace("{actual}", (actual == undefined ? actual : JSON.stringify(actual)));
 
       if(SpecIt.currentExpectation === "should") {
         message = message.replace("{not} ", "");
@@ -133,7 +143,7 @@
       },
       be: function() {
         Matcher("be", "ok",
-                {assert:   JSON.parse(JSON.stringify(this)),
+                {assert:   (this instanceof Wrapper) ? false : JSON.parse(JSON.stringify(this)),
                  expected: {value: true, parse: true},
                  actual:   {value: this, parse: true}});
       },
