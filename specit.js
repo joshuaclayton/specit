@@ -73,23 +73,23 @@
   $.extend(SpecIt, {
     expectationMessage: function(matcher, expected, actual) {
       var matcherMessages = {
-        include:                "Expected {actual} {not} to include {expected}",
-        eql:                    "Expected {actual} {not} to equal",
-        beSimilarTo:            "Expected {actual} {not} to be the same as",
-        be:                     "Expected {actual} {not} to be true",
-        beA:                    "Expected {actual} {not} to be a",
-        beAn:                   "Expected {actual} {not} to be an",
-        match:                  "Expected {actual} {not} to match {expected}",
+        include:                "Expected {expected} {not} to include {actual}",
+        eql:                    "Expected {expected} {not} to equal {actual}",
+        beSimilarTo:            "Expected {expected} {not} to be the same as {actual}",
+        be:                     "Expected {expected} {not} to be true",
+        beA:                    "Expected {expected} {not} to be a {actual}",
+        beAn:                   "Expected {expected} {not} to be an {actual}",
+        match:                  "Expected {expected} {not} to match {actual}",
         respondTo:              "Expected {expected} {not} to be a method of {actual}",
-        beLessThan:             "Expected {actual} {not} to be less than {expected}",
-        beLessThanOrEqualTo:    "Expected {actual} {not} to be less than or equal to {expected}",
-        beGreaterThan:          "Expected {actual} {not} to be greater than {expected}",
-        beGreaterThanOrEqualTo: "Expected {actual} {not} to be greater than or equal to {expected}",
-        beOnThePage:            "Expected {actual} {not} to be on the page",
-        beEmpty:                "Expected {actual} {not} to be empty",
-        beToTheLeftOf:          "Expected {actual} {not} to be to the left of {expected}",
-        beToTheRightOf:         "Expected {actual} {not} to be to the right of {expected}",
-        beAbove:                "Expected {actual} {not} to be above {expected}"
+        beLessThan:             "Expected {expected} {not} to be less than  {actual}",
+        beLessThanOrEqualTo:    "Expected {expected} {not} to be less than or equal to {actual}",
+        beGreaterThan:          "Expected {expected} {not} to be greater than {actual}",
+        beGreaterThanOrEqualTo: "Expected {expected} {not} to be greater than or equal to {actual}",
+        beOnThePage:            "Expected {expected} {not} to be on the page {actual}",
+        beEmpty:                "Expected {expected} {not} to be empty {actual}",
+        beToTheLeftOf:          "Expected {expected} {not} to be to the left of {actual}",
+        beToTheRightOf:         "Expected {expected} {not} to be to the right of {actual}",
+        beAbove:                "Expected {expected} {not} to be above {actual}"
       }, message, options = arguments[3];
 
       message = matcherMessages[matcher];
