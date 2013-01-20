@@ -173,9 +173,9 @@ describe("SpecIt", function() {
   });
 });
 
-var john, beforeCallbackTest, afterCallbackTest;
 
 describe("SpecIt with a before callback", function() {
+  var john, beforeCallbackTest, afterCallbackTest;
   var jane = {name: "Jane"};
 
   before(function() {
@@ -191,37 +191,39 @@ describe("SpecIt with a before callback", function() {
   it("should run before every test", function() {
     john.name = "Wrong name";
     jane.age = 26;
+    expect(0);
   });
 
   it("should run before every test", function() {
-    equals(john.name, "John Doe");
+    equal(john.name, "John Doe");
   });
 
   it("should not know attributes from another before callback", function() {
-    equals(john.age, undefined);
+    equal(john.age, undefined);
   });
 
   it("should not modify attributes on a local object if untouched in before", function() {
-    equals(jane.age, 26);
+    equal(jane.age, 26);
   });
 });
 
 // the john object will carry over, but the jane object will not
 describe("SpecIt with a different before callback", function() {
+  var john = {}, jane;
   before(function() { john.age = 35; });
 
   it("should not run other describes' before callbacks", function() {
     john.name = "whatever";
-    equals(john.age, 35);
+    equal(john.age, 35);
   });
 
   it("should not run other describes' before callbacks", function() {
-    equals(john.name, "whatever");
-    equals(john.age, 35);
+    equal(john.name, "whatever");
+    equal(john.age, 35);
   });
 
   it("should not know of other objects in a different describe", function() {
-    equals(typeof jane, "undefined");
+    equal(typeof jane, "undefined");
   });
 });
 
@@ -233,16 +235,16 @@ describe("SpecIt with an after callback", function() {
   });
 
   it("should not call after callback until after a test is run", function() {
-    equals(changedFromAfterCallback, "unchanged");
+    equal(changedFromAfterCallback, "unchanged");
   });
 
   it("should call the after callback the first test is run", function() {
-    equals(changedFromAfterCallback, "changed");
+    equal(changedFromAfterCallback, "changed");
     changedFromAfterCallback = "bogus";
   });
 
   it("should call the after callback after each test is run", function() {
-    equals(changedFromAfterCallback, "changed");
+    equal(changedFromAfterCallback, "changed");
   });
 });
 
