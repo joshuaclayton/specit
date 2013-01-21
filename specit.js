@@ -138,12 +138,12 @@
                  actual:   {value: this, parse: true}});
       },
       beA: function() {
-        Matcher("beA", "equals",
+        Matcher("beA", "equal",
                 {expected: {value: arguments[0].name.toString(), parse: true},
                  actual:   {value: this.constructor.name,        parse: true, messageValue: this}});
       },
       beAn: function() {
-        Matcher("beAn", "equals",
+        Matcher("beAn", "equal",
                 {expected: {value: arguments[0].name.toString(), parse: true},
                  actual:   {value: this.constructor.name,        parse: true, messageValue: this}});
       },
